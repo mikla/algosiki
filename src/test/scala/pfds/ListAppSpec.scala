@@ -8,8 +8,7 @@ import matchers._
 class ListAppSpec extends AnyFlatSpec with should.Matchers {
 
   "A list.update" should "update element by index" in {
-    update(List(1, 2, 3, 4, 5), 2, -1) should contain
-    theSameElementsAs (List(
+    update(List(1, 2, 3, 4, 5), 2, -1) should contain theSameElementsAs (List(
       1,
       2,
       -1,
