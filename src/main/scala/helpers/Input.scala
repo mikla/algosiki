@@ -14,4 +14,6 @@ object Input {
 
   def readListInt(file: String): List[Int] = readListString(file).map(_.toInt)
 
+  def readCommaSeparatedInts(file: String) = readAsString(file).split(",").map(_.toInt).toList
+
 }
