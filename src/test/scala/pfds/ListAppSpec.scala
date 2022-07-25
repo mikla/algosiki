@@ -2,7 +2,7 @@ package pfds
 
 import org.scalatest._
 import flatspec._
-import fpds.ListApp.{suffixes, update}
+import pfds.ListApp.{suffixes, update}
 import matchers._
 
 class ListAppSpec extends AnyFlatSpec with should.Matchers {
