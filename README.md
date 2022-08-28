@@ -2,5 +2,5 @@
 Playground for algorithms
 
 - Algorithms in general
-- Leedcode solutions
+- Leetcode solutions
 - Advent of code solutions
