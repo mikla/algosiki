@@ -4,7 +4,7 @@ import scala.annotation.tailrec
 
 // 704. Binary Search
 // https://leetcode.com/problems/binary-search/
-object BinarySearch extends App {
+object _704_BinarySearch extends App {
 
   def search(nums: Array[Int], target: Int): Int = {
 

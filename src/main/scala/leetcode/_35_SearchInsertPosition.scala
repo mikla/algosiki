@@ -3,7 +3,7 @@ package leetcode
 import scala.annotation.tailrec
 
 // https://leetcode.com/problems/search-insert-position
-object SearchInsertPosition extends App {
+object _35_SearchInsertPosition extends App {
 
   def searchInsert(nums: Array[Int], target: Int): Int = {
 

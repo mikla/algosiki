@@ -1,7 +1,7 @@
 package leetcode
 
 // 637 https://leetcode.com/problems/average-of-levels-in-binary-tree/
-object AverageOfLevelsInBinaryTree extends App {
+object _637_AverageOfLevelsInBinaryTree extends App {
 
   object Solution {
     def averageOfLevels(root: TreeNode): Array[Double] = {

@@ -1,7 +1,7 @@
 package leetcode
 
 // https://leetcode.com/problems/reverse-words-in-a-string-iii/
-object ReverseStringIII extends App {
+object _557_ReverseStringIII extends App {
 
   def reverseWords(s: String): String = {
     s.split(" ").map(_.reverse).mkString(" ")

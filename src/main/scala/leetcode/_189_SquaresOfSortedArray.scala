@@ -1,6 +1,6 @@
 package leetcode
 
-object SquaresOfSortedArray extends App {
+object _189_SquaresOfSortedArray extends App {
 
   def sortedSquares(nums: Array[Int]): Array[Int] = {
     nums.map(a => a * a).sorted

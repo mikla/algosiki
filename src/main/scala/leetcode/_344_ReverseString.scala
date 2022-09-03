@@ -1,7 +1,7 @@
 package leetcode
 
 // https://leetcode.com/problems/reverse-string/
-object ReverseString extends App {
+object _344_ReverseString extends App {
 
   def reverseString(s: Array[Char]): Unit = {
     var i = 0

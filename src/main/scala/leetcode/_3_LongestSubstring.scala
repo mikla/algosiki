@@ -1,7 +1,7 @@
 package leetcode
 
 //https://leetcode.com/problems/longest-substring-without-repeating-characters/
-object LongestSubstring extends App {
+object _3_LongestSubstring extends App {
 
   def lengthOfLongestSubstrin1(s: String): Int = {
 

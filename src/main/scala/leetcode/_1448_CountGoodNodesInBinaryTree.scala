@@ -2,7 +2,7 @@ package leetcode
 
 //https://leetcode.com/problems/count-good-nodes-in-binary-tree/
 
-object CountGoodNodesInBinaryTree extends App {
+object _1448_CountGoodNodesInBinaryTree extends App {
 
   object Solution {
     def goodNodes(root: TreeNode): Int = {

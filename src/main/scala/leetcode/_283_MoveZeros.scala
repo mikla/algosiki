@@ -1,7 +1,7 @@
 package leetcode
 
 // https://leetcode.com/problems/move-zeroes/
-object MoveZeros extends App {
+object _283_MoveZeros extends App {
 
   def moveZeroes(nums: Array[Int]): Unit = {
     var i = 0

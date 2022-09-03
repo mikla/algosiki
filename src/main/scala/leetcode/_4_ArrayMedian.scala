@@ -1,10 +1,11 @@
 package leetcode
 
-import leetcode.ArrayMedian.Solution.findMedianSortedArrays
+import leetcode._4_ArrayMedian.Solution.findMedianSortedArrays
 
 import scala.annotation.tailrec
 
-object ArrayMedian extends App{
+// 4 https://leetcode.com/problems/median-of-two-sorted-arrays/
+object _4_ArrayMedian extends App{
 
   object Solution {
     def findMedianSortedArrays(nums1: Array[Int], nums2: Array[Int]): Double = {

@@ -3,7 +3,7 @@ package leetcode
 import scala.collection.mutable
 
 // https://leetcode.com/problems/my-calendar-iii/
-object MyCalendarIII extends App {
+object _732_MyCalendarIII extends App {
 
   class MyCalendarThree() {
 
@@ -22,7 +22,7 @@ object MyCalendarIII extends App {
 
   }
 
-  val myCalendarThree = new MyCalendarIII.MyCalendarThree
+  val myCalendarThree = new _732_MyCalendarIII.MyCalendarThree
 
   println(myCalendarThree.book(24, 40))
   println(myCalendarThree.book(43, 50))

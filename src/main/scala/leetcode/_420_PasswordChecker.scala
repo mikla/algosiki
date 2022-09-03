@@ -1,6 +1,7 @@
 package leetcode
 
-object PasswordChecker extends App {
+// https://leetcode.com/problems/strong-password-checker/
+object _420_PasswordChecker extends App {
 
   object Solution {
 
