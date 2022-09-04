@@ -1,4 +1,4 @@
-package pfds
+package pfds.chapter2
 
 object ListApp extends App {
 

@@ -1,9 +1,9 @@
-package pfds
+package pfds.chapter2
 
 import org.scalatest._
-import flatspec._
-import pfds.ListApp.{suffixes, update}
-import matchers._
+import org.scalatest.flatspec._
+import org.scalatest.matchers._
+import pfds.chapter2.ListApp.{suffixes, update}
 
 class ListAppSpec extends AnyFlatSpec with should.Matchers {
 
