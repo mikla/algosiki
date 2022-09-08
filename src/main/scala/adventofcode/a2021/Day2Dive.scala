@@ -49,9 +49,8 @@ object Day2Dive extends App {
 
   val star1 = input
     .map(Instruction.fromString)
-    .foldLeft(Position.Initial) {
-      case (position, instruction) =>
-        instruction.perform(position)
+    .foldLeft(Position.Initial) { case (position, instruction) =>
+      instruction.perform(position)
     }
     .mult
 

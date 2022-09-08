@@ -22,8 +22,8 @@ object _1_TwoSum extends App {
     searchIndex(0, numsWithIndexes.length - 1).toArray
   }
 
-  println(_1_TwoSum.twoSum(Array(2,7,11,15), 9).toList)
-  println(_1_TwoSum.twoSum(Array(3,2,4), 6).toList)
-  println(_1_TwoSum.twoSum(Array(3,3), 6).toList)
+  println(_1_TwoSum.twoSum(Array(2, 7, 11, 15), 9).toList)
+  println(_1_TwoSum.twoSum(Array(3, 2, 4), 6).toList)
+  println(_1_TwoSum.twoSum(Array(3, 3), 6).toList)
 
 }

@@ -16,10 +16,9 @@ object Day6Lanternfish extends App {
       if (e == -1) List(6, 8) else List(e)
     }
 
-  val after = (1 to 256).foldLeft(input) {
-    case (acc, i) =>
-      println(s"day ${i}")
-      create(dec(acc))
+  val after = (1 to 256).foldLeft(input) { case (acc, i) =>
+    println(s"day ${i}")
+    create(dec(acc))
   }
 
   println(after.size)

@@ -24,7 +24,11 @@ object _814_BinaryTreePruning extends App {
     }
   }
 
-  val testTree1 = new TreeNode(1, new TreeNode(0, new TreeNode(0), new TreeNode(0)), new TreeNode(1, new TreeNode(0), new TreeNode(1)))
+  val testTree1 = new TreeNode(
+    1,
+    new TreeNode(0, new TreeNode(0), new TreeNode(0)),
+    new TreeNode(1, new TreeNode(0), new TreeNode(1))
+  )
 
   Solution.pruneTree(testTree1)
 

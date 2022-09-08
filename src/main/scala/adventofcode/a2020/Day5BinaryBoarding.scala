@@ -16,14 +16,17 @@ object Day5BinaryBoarding extends App {
 
   def seatId(row: Int, col: Int) = row * 8 + col
 
-  val ids = lines.map(str => seatId(toDec(str.substring(0, 7)), toDec(str.substring(7))))
+  val ids = lines.map(str =>
+    seatId(toDec(str.substring(0, 7)), toDec(str.substring(7)))
+  )
 
   val ans1 = ids.max
 
   println(ans1)
 
   println {
-    ids.sorted.sliding(3)
+    ids.sorted
+      .sliding(3)
       .collectFirst {
         case a :: b :: c :: Nil if a + 1 == b && b + 1 != c => b + 1
       }

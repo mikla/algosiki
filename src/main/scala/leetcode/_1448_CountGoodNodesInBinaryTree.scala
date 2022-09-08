@@ -13,15 +13,18 @@ object _1448_CountGoodNodesInBinaryTree extends App {
       val currentNode = if (maxOnTheWay <= node.value) 1 else 0
       val localMax = Math.max(maxOnTheWay, node.value)
 
-      val leftGoodNodes = if (node.left != null) isGood(localMax, node.left) else 0
-      val rightGoodNodes = if (node.right != null) isGood(localMax, node.right) else 0
+      val leftGoodNodes =
+        if (node.left != null) isGood(localMax, node.left) else 0
+      val rightGoodNodes =
+        if (node.right != null) isGood(localMax, node.right) else 0
 
       currentNode + leftGoodNodes + rightGoodNodes
     }
   }
 
   trait Tree
-  case class TreeNode2(value: Int = 0, left: Tree = Empty, right: Tree = Empty) extends Tree
+  case class TreeNode2(value: Int = 0, left: Tree = Empty, right: Tree = Empty)
+      extends Tree
   case object Empty extends Tree
 
   object Solution2 {
@@ -44,16 +47,13 @@ object _1448_CountGoodNodesInBinaryTree extends App {
     }
   }
 
-  val testTree1 = TreeNode2(3,
-    TreeNode2(1,
-      TreeNode2(3),
-    ),
+  val testTree1 = TreeNode2(
+    3,
+    TreeNode2(1, TreeNode2(3)),
     TreeNode2(4, TreeNode2(1), TreeNode2(5))
   )
 
-  val testTree2 = TreeNode2(3,
-    TreeNode2(3, TreeNode2(4), TreeNode2(2))
-  )
+  val testTree2 = TreeNode2(3, TreeNode2(3, TreeNode2(4), TreeNode2(2)))
 
   val testTree3 = TreeNode2(1)
 

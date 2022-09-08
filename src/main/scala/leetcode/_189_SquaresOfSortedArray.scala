@@ -19,6 +19,6 @@ object _189_SquaresOfSortedArray extends App {
     }
   }
 
-  println(rotate(Array(1,2,3,4,5,6,7), 3))
+  println(rotate(Array(1, 2, 3, 4, 5, 6, 7), 3))
 
 }

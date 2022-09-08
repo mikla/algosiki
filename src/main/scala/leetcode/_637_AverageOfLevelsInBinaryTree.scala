@@ -28,14 +28,20 @@ object _637_AverageOfLevelsInBinaryTree extends App {
 
     def loop(level: Int, tree: TreeNode): List[(Int, Double)] = {
       val currentLevel = List(level -> tree.value.toDouble)
-      val searchLeft = if (tree.left != null) loop(level + 1, tree.left) else Nil
-      val searchRight = if (tree.right != null) loop(level + 1, tree.right) else Nil
+      val searchLeft =
+        if (tree.left != null) loop(level + 1, tree.left) else Nil
+      val searchRight =
+        if (tree.right != null) loop(level + 1, tree.right) else Nil
 
       currentLevel ++ searchLeft ++ searchRight
     }
   }
 
-  val testTree1 = new TreeNode(3, new TreeNode(9), new TreeNode(20, new TreeNode(15), new TreeNode(7)))
+  val testTree1 = new TreeNode(
+    3,
+    new TreeNode(9),
+    new TreeNode(20, new TreeNode(15), new TreeNode(7))
+  )
 
   println(Solution.averageOfLevels(testTree1).mkString(","))
 

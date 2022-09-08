@@ -57,8 +57,12 @@ object Day20JurassicJigsaw extends App {
   case class Image(tiles: Array[Array[Option[Tile]]]) {
     val N: Int = tiles.length
 
-    def id: Long = List(tiles(0)(0), tiles(0)(N - 1), tiles(N - 1)(0), tiles(N - 1)(N - 1))
-      .flatten.map(_.id.toLong).product
+    def id: Long = List(
+      tiles(0)(0),
+      tiles(0)(N - 1),
+      tiles(N - 1)(0),
+      tiles(N - 1)(N - 1)
+    ).flatten.map(_.id.toLong).product
 
     def isCoordsOk(i: Int, j: Int): Boolean =
       i >= 0 && i < N && j >= 0 && j < N
@@ -72,7 +76,12 @@ object Day20JurassicJigsaw extends App {
         getTile(i, j + 1).forall(_.leftCol == tile.rightCol) &&
         getTile(i - 1, j).forall(_.bottomRow == tile.topRow) &&
         getTile(i + 1, j).forall(_.topRow == tile.bottomRow) &&
-        List(getTile(i, j - 1), getTile(i, j + 1), getTile(i - 1, j), getTile(i + 1, j)).exists(_.isDefined)
+        List(
+          getTile(i, j - 1),
+          getTile(i, j + 1),
+          getTile(i - 1, j),
+          getTile(i + 1, j)
+        ).exists(_.isDefined)
 
     // rotate 3 time + flip vertical and horizontal
     def fitsToWithRotation(tile: Tile): Option[((Int, Int), Tile)] = {
@@ -82,7 +91,9 @@ object Day20JurassicJigsaw extends App {
         i <- 0 until N
         j <- 0 until N
       } yield List(
-        tile, tile.flipVertical, tile.flipHorizontal,
+        tile,
+        tile.flipVertical,
+        tile.flipHorizontal,
         tile.rotate90Clockwise,
         tile.rotate90Clockwise.rotate90Clockwise,
         tile.rotate90Clockwise.rotate90Clockwise.rotate90Clockwise
@@ -109,20 +120,24 @@ object Day20JurassicJigsaw extends App {
     }
   }
 
-  val lines = Input.readListString("src/main/scala/a2020/Day20JurassicJigsaw.in") :+ ""
+  val lines =
+    Input.readListString("src/main/scala/a2020/Day20JurassicJigsaw.in") :+ ""
 
-  val tiles = lines.foldLeft((List.empty[Tile], Array.empty[Array[Char]], 0)) {
-    case ((allTiles, currentTile, tileId), inputData) =>
-      inputData match {
-        case s"Tile $id:" => (allTiles, currentTile, id.toInt)
-        case ""           => (Tile(tileId, currentTile) :: allTiles, Array.empty[Array[Char]], 0)
-        case bitMap       => (allTiles, currentTile :+ bitMap.toCharArray, tileId)
-      }
-  }._1
+  val tiles = lines
+    .foldLeft((List.empty[Tile], Array.empty[Array[Char]], 0)) {
+      case ((allTiles, currentTile, tileId), inputData) =>
+        inputData match {
+          case s"Tile $id:" => (allTiles, currentTile, id.toInt)
+          case "" =>
+            (Tile(tileId, currentTile) :: allTiles, Array.empty[Array[Char]], 0)
+          case bitMap => (allTiles, currentTile :+ bitMap.toCharArray, tileId)
+        }
+    }
+    ._1
 
   def reassembleImage(img: Image, tiles: List[Tile]): Option[Image] = {
     tiles match {
-      case Nil       =>
+      case Nil =>
         println(img.id)
         Some(img)
       case tilesLeft =>
@@ -130,12 +145,14 @@ object Day20JurassicJigsaw extends App {
           val coordsFit = img.fitsToWithRotation(tile)
           if (coordsFit.isDefined) {
             val ((x, y), fittedTile) = coordsFit.get
-            reassembleImage(img.placeTile(x, y, fittedTile), tiles.filterNot(_.id == fittedTile.id))
+            reassembleImage(
+              img.placeTile(x, y, fittedTile),
+              tiles.filterNot(_.id == fittedTile.id)
+            )
           } else None
         }.headOption
     }
   }
-
 
   //  val img = tiles.foldLeft(None: Option[Image]) { case (acc, tile) =>
   //    acc match {
@@ -146,8 +163,17 @@ object Day20JurassicJigsaw extends App {
 
   val img = {
 
-    val res = Task.parSequenceN(12)(tiles.map(tile =>
-      Task(reassembleImage(Image.initWith(Math.sqrt(tiles.length).toInt, tile), tiles.filterNot(_.id == tile.id)))))
+    val res = Task
+      .parSequenceN(12)(
+        tiles.map(tile =>
+          Task(
+            reassembleImage(
+              Image.initWith(Math.sqrt(tiles.length).toInt, tile),
+              tiles.filterNot(_.id == tile.id)
+            )
+          )
+        )
+      )
       .runSyncUnsafe(Duration.Inf)(monix.execution.Scheduler.global, implicitly)
       .find(_.isDefined)
       .flatten
@@ -165,7 +191,7 @@ object Day20JurassicJigsaw extends App {
     Array(
       Array(Tile1951.map(_.flipVertical), None, None),
       Array(None, None, None),
-      Array(None, None, None),
+      Array(None, None, None)
     )
   )
 

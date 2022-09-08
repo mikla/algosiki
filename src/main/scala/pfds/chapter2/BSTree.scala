@@ -24,7 +24,7 @@ object BSTree {
 
       def loop(tree: Tree[V]): Tree[V] = tree match {
         case Empty => Branch(x)
-        case s@Branch(value, left, right) =>
+        case s @ Branch(value, left, right) =>
           if (O.lt(x, value)) Branch(value, loop(left), right)
           else if (O.gt(x, value)) Branch(value, left, loop(right))
           else s
@@ -34,12 +34,11 @@ object BSTree {
 
     }
 
-
   }
 
   case object Empty extends Tree[Nothing]
 
-  case class Branch[T](value: T, left: Tree[T] = Empty, right: Tree[T] = Empty) extends Tree[T]
-
+  case class Branch[T](value: T, left: Tree[T] = Empty, right: Tree[T] = Empty)
+      extends Tree[T]
 
 }

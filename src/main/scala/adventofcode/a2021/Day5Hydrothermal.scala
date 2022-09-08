@@ -11,8 +11,8 @@ object Day5Hydrothermal extends App {
 
   val input = Input
     .readListString("src/main/scala/adventofcode/a2021/Day5Hydrothermal.in")
-    .map {
-      case s"$x1,$y1 -> $x2,$y2" => (x1.toInt, y1.toInt) -> (x2.toInt, y2.toInt)
+    .map { case s"$x1,$y1 -> $x2,$y2" =>
+      (x1.toInt, y1.toInt) -> (x2.toInt, y2.toInt)
     }
     .map {
       case ((x1, y1), (x2, y2)) if x1 == x2 =>
@@ -39,28 +39,24 @@ object Day5Hydrothermal extends App {
         (from to to).foreach { y => incPosition(x, y) }
       case Diagonal((x1, y1), (x2, y2)) =>
         if (x1 < x2 && y1 > y2)
-          (x1 to x2).foldLeft(y1) {
-            case (y, x) =>
-              incPosition(x, y)
-              y - 1
+          (x1 to x2).foldLeft(y1) { case (y, x) =>
+            incPosition(x, y)
+            y - 1
           }
         else if (x1 < x2 && y1 < y2)
-          (x1 to x2).foldLeft(y1) {
-            case (y, x) =>
-              incPosition(x, y)
-              y + 1
+          (x1 to x2).foldLeft(y1) { case (y, x) =>
+            incPosition(x, y)
+            y + 1
           }
         else if (x1 > x2 && y1 > y2)
-          (x2 to x1).foldLeft(y2) {
-            case (y, x) =>
-              incPosition(x, y)
-              y + 1
+          (x2 to x1).foldLeft(y2) { case (y, x) =>
+            incPosition(x, y)
+            y + 1
           }
         else if (x1 > x2 && y1 < y2)
-          (x2 to x1).foldLeft(y2) {
-            case (y, x) =>
-              incPosition(x, y)
-              y - 1
+          (x2 to x1).foldLeft(y2) { case (y, x) =>
+            incPosition(x, y)
+            y - 1
           }
     }
 

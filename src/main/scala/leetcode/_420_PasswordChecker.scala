@@ -12,7 +12,8 @@ object _420_PasswordChecker extends App {
     val oneLowerCase: Rule = s => "([a-z]+)".r.findFirstIn(s).isDefined
     val oneUpperCase: Rule = s => "([A-Z]+)".r.findFirstIn(s).isDefined
     val oneDigit: Rule = s => "([0-9]+)".r.findFirstIn(s).isDefined
-    val repeatedRule: Rule = s => s.sliding(3, 3).toList.exists(s => s.forall(_ == s.head) && s.length == 3)
+    val repeatedRule: Rule = s =>
+      s.sliding(3, 3).toList.exists(s => s.forall(_ == s.head) && s.length == 3)
 
     val AllRules = List(
       minCharsRule,
@@ -24,9 +25,9 @@ object _420_PasswordChecker extends App {
     )
 
     def strongPasswordChecker(password: String): Int = {
-      println(AllRules.map(_ (password)))
+      println(AllRules.map(_(password)))
 
-      AllRules.map(_ (password)).count(_ == false)
+      AllRules.map(_(password)).count(_ == false)
 
     }
 

@@ -21,7 +21,8 @@ object _606_ConstructStringFromBinaryTree extends App {
     }
   }
 
-  val testTree1 = new TreeNode(1, new TreeNode(2, new TreeNode(4)), new TreeNode(3))
+  val testTree1 =
+    new TreeNode(1, new TreeNode(2, new TreeNode(4)), new TreeNode(3))
 
   println(Solution.tree2str(testTree1))
 

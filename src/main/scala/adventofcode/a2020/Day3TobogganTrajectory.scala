@@ -7,12 +7,19 @@ import scala.annotation.tailrec
 // https://adventofcode.com/2020/day/3
 object Day3TobogganTrajectory extends App {
 
-  val lines = Input.readListString("src/main/scala/a2020/Day3TobogganTrajectory.in")
+  val lines =
+    Input.readListString("src/main/scala/a2020/Day3TobogganTrajectory.in")
 
   val arr = lines.map(_.toCharArray).toArray
 
   @tailrec
-  def loop(initX: Int, initY: Int, trees: Int, nextX: Int => Int, nextY: Int => Int): Long = {
+  def loop(
+      initX: Int,
+      initY: Int,
+      trees: Int,
+      nextX: Int => Int,
+      nextY: Int => Int
+  ): Long = {
     if (initY > arr.length - 1) trees
     else {
       val xx = initX % arr(0).length

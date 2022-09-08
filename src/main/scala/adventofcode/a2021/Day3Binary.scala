@@ -10,21 +10,18 @@ object Day3Binary extends App {
     )
 
   val distribution = input
-    .foldLeft(Map.empty[Int, (Int, Int)]) {
-      case (acc, line) =>
-        line.zipWithIndex.foldLeft(acc) {
-          case (a, (char, index)) =>
-            val (zeros, ones) = a.getOrElse(index, (0, 0))
-            if (char == '0') a.updated(index, (zeros + 1, ones))
-            else a.updated(index, (zeros, ones + 1))
-        }
+    .foldLeft(Map.empty[Int, (Int, Int)]) { case (acc, line) =>
+      line.zipWithIndex.foldLeft(acc) { case (a, (char, index)) =>
+        val (zeros, ones) = a.getOrElse(index, (0, 0))
+        if (char == '0') a.updated(index, (zeros + 1, ones))
+        else a.updated(index, (zeros, ones + 1))
+      }
     }
 
   val mostCommon =
     distribution
-      .map {
-        case (key, (zeros, ones)) =>
-          key -> (if (zeros > ones) 0 else 1)
+      .map { case (key, (zeros, ones)) =>
+        key -> (if (zeros > ones) 0 else 1)
       }
       .toList
       .sortBy(_._1)
@@ -33,9 +30,8 @@ object Day3Binary extends App {
 
   val leastCommon =
     distribution
-      .map {
-        case (key, (zeros, ones)) =>
-          key -> (if (zeros > ones) 1 else 0)
+      .map { case (key, (zeros, ones)) =>
+        key -> (if (zeros > ones) 1 else 0)
       }
       .toList
       .sortBy(_._1)

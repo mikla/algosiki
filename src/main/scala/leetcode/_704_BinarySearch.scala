@@ -17,7 +17,8 @@ object _704_BinarySearch extends App {
         case _ =>
           val median = n.length / 2
           val (leftArr, rightArr) = n.splitAt(median)
-          if (n(median - 1) < target) search0(rightArr, indexOffset + leftArr.length)
+          if (n(median - 1) < target)
+            search0(rightArr, indexOffset + leftArr.length)
           else search0(leftArr, indexOffset)
       }
 

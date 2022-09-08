@@ -5,7 +5,7 @@ import leetcode._4_ArrayMedian.Solution.findMedianSortedArrays
 import scala.annotation.tailrec
 
 // 4 https://leetcode.com/problems/median-of-two-sorted-arrays/
-object _4_ArrayMedian extends App{
+object _4_ArrayMedian extends App {
 
   object Solution {
     def findMedianSortedArrays(nums1: Array[Int], nums2: Array[Int]): Double = {
@@ -28,7 +28,7 @@ object _4_ArrayMedian extends App{
       val mergedArray = loop(nums1.toList, nums2.toList, List.empty)
 
       mergedArray match {
-        case x :: Nil => x
+        case x :: Nil      => x
         case x :: y :: Nil => (x + y) / 2.toDouble
         case rest =>
           val median = mergedArray.length / 2

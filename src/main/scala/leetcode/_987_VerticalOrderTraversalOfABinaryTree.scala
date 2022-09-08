@@ -23,19 +23,28 @@ object _987_VerticalOrderTraversalOfABinaryTree extends App {
 
     }
 
-    def traverse(tree: TreeNode, currCord: Cord, acc: List[(Cord, Int)]): List[(Cord, Int)] = {
+    def traverse(
+        tree: TreeNode,
+        currCord: Cord,
+        acc: List[(Cord, Int)]
+    ): List[(Cord, Int)] = {
       val currNode = acc :+ (currCord -> tree.value)
 
-      val leftTraverse = if (tree.left != null) traverse(tree.left, currCord.left, acc) else Nil
-      val rightTraverse = if (tree.right != null) traverse(tree.right, currCord.right, acc) else Nil
+      val leftTraverse =
+        if (tree.left != null) traverse(tree.left, currCord.left, acc) else Nil
+      val rightTraverse =
+        if (tree.right != null) traverse(tree.right, currCord.right, acc)
+        else Nil
 
       currNode ++ leftTraverse ++ rightTraverse
     }
   }
 
-  val testTree1 = new TreeNode(3,
+  val testTree1 = new TreeNode(
+    3,
     new TreeNode(9),
-      new TreeNode(20, new TreeNode(15), new TreeNode(7)))
+    new TreeNode(20, new TreeNode(15), new TreeNode(7))
+  )
 
   println(Solution.verticalTraversal(testTree1))
 
