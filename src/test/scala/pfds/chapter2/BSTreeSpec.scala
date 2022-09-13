@@ -25,7 +25,7 @@ class BSTreeSpec extends AnyFlatSpec with should.Matchers {
     assert((1 to 9).forall(tree.member))
   }
 
-
-  val testTree = Branch(9, Branch(8, Branch(7)), Branch(10, Branch(11), Branch(12)))
+  val testTree =
+    Branch(9, Branch(8, Branch(7)), Branch(10, Branch(11), Branch(12)))
 
 }
