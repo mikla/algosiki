@@ -19,7 +19,40 @@ package object leetcode {
   class ListNode(_x: Int = 0, _next: ListNode = null) {
     var next: ListNode = _next
     var x: Int = _x
+  }
 
+  object ListNode {
+
+    def fromList(l: List[Int]): ListNode =
+      l.init.foldRight(new ListNode(l.last)) { case (elem, acc) =>
+        new ListNode(elem, acc)
+      }
+
+    def toList(node: ListNode): List[Int] = {
+      if (node != null) {
+        val l = scala.collection.mutable.ArrayBuffer(node.x)
+        var h = node
+        while (h.next != null) {
+          h = h.next
+          l.append(h.x)
+        }
+        l.toList
+      } else Nil
+    }
+
+    def toStringListNode(head: ListNode): String = {
+
+      val nodes: Array[ListNode] = Array(head)
+      var i = 1
+
+      var lhead = head
+      while (lhead.next != null) {
+        nodes :+ lhead.next
+        lhead = lhead.next
+        i += 1
+      }
+      nodes.map(_.x).mkString(",")
+    }
   }
 
 }
