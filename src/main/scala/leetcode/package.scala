@@ -39,20 +39,6 @@ package object leetcode {
         l.toList
       } else Nil
     }
-
-    def toStringListNode(head: ListNode): String = {
-
-      val nodes: Array[ListNode] = Array(head)
-      var i = 1
-
-      var lhead = head
-      while (lhead.next != null) {
-        nodes :+ lhead.next
-        lhead = lhead.next
-        i += 1
-      }
-      nodes.map(_.x).mkString(",")
-    }
   }
 
 }
