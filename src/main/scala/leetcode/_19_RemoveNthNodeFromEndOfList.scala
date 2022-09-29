@@ -1,6 +1,5 @@
 package leetcode
 
-import leetcode.ListNode.toStringListNode
 
 object _19_RemoveNthNodeFromEndOfList extends App {
 
