@@ -12,13 +12,12 @@ object _112_PathSums extends App {
       def loop(
           node: TreeNode,
           currentSum: Int
-      ): Boolean = {
-        if (node != null) {
-          val recur = loop(_, currentSum + node.value)
-          if (currentSum + node.value == targetSum && isLeaf(node)) true
-          else recur(node.left) || recur(node.right)
-        } else false
-      }
+      ): Boolean =
+        (node != null) && (
+          (currentSum + node.value == targetSum && isLeaf(node)) ||
+            loop(node.left, currentSum + node.value) ||
+            loop(node.right, currentSum + node.value)
+        )
 
       loop(root, 0)
     }
