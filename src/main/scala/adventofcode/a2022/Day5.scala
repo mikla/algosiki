@@ -17,13 +17,6 @@ object Day5 extends App {
       9 -> "JQVPGLF"
     )
 
-  val init0 =
-    Map(
-      1 -> "NZ",
-      2 -> "DCM",
-      3 -> "P"
-    )
-
   val instructions =
     Input.readListString("src/main/scala/adventofcode/a2022/Day5.in")
 
@@ -35,10 +28,12 @@ object Day5 extends App {
       .flatMap(_._2)
       .mkString("")
 
-  val part1 = instructions
+  def solution(reverse: Boolean) = instructions
     .foldLeft(init) { case (acc, s"move $count from $from to $to") =>
-      val updated =
-        acc(from.toInt).take(count.toInt).reverse.concat(acc(to.toInt))
+      val updated = {
+        val toTake = acc(from.toInt).take(count.toInt)
+        if (reverse) toTake.reverse else toTake
+      }.concat(acc(to.toInt))
       val removed = acc(from.toInt).drop(count.toInt)
 
       acc
@@ -46,16 +41,8 @@ object Day5 extends App {
         .updated(to.toInt, updated)
     }
 
-  val part2 = instructions
-    .foldLeft(init) { case (acc, s"move $count from $from to $to") =>
-      val updated =
-        acc(from.toInt).take(count.toInt).concat(acc(to.toInt))
-      val removed = acc(from.toInt).drop(count.toInt)
-
-      acc
-        .updated(from.toInt, removed)
-        .updated(to.toInt, updated)
-    }
+  val part1 = solution(reverse = true)
+  val part2 = solution(reverse = false)
 
   println(sol(part1))
   println(sol(part2))
