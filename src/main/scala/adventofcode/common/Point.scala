@@ -15,7 +15,7 @@ case class Point[T](x: T, y: T)(implicit N: Numeric[T]) {
 
   /*  Manhattan distance https://en.wikipedia.org/wiki/Taxicab_geometry */
   def manh(p: Point[T]): T =
-    N.abs(N.plus(N.minus(x, p.x), N.abs(N.minus(y, p.y))))
+    N.plus(N.abs(N.minus(x, p.x)), N.abs(N.minus(y, p.y)))
 }
 
 object Point {

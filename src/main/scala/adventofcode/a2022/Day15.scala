@@ -1,77 +1,58 @@
 package adventofcode.a2022
 
 import adventofcode.common.Point
-import adventofcode.common.Point.{PointI, PointL}
+import adventofcode.common.Point.PointI
 import helpers.Input
-import monix.eval.Task
-import monix.execution.Scheduler
-import monix.execution.Scheduler.Implicits.global
-
-import scala.collection.mutable.ArrayBuffer
-import scala.concurrent.Await
-import scala.concurrent.duration.{Duration, DurationInt}
 
 object Day15 extends App {
 
-  val input = Input.readListString("src/main/scala/adventofcode/a2022/Day15.in")
+  val input =
+    Input.readListString("src/main/scala/adventofcode/a2022/Day15_0.in")
 
   val points = input.map {
     case s"Sensor at x=$sensorX, y=$sensorY: closest beacon is at x=$beaconX, y=$beaconY" =>
-      Point(sensorX.toInt, sensorY.toInt) -> Point(
+      val s = Point(sensorX.toInt, sensorY.toInt)
+      val b = Point(
         beaconX.toInt,
         beaconY.toInt
       )
+
+      (s, b, s.manh(b))
   }
 
   val targetY = 2000000
 
-  def collectClosestPoints(
-      sensor: PointI,
-      beacon: PointI
-  ): Task[ArrayBuffer[PointI]] = Task.eval {
-    val dist = sensor.manh(beacon)
-
-    println(
-      s"sensor: $sensor, beacon: $beacon, dist: $dist" + Thread
-        .currentThread()
-        .getName
-    )
+  def collectOnlyInQuestion(targetY: Int) = {
 
     val vec = scala.collection.mutable.ArrayBuffer.empty[PointI]
 
-    var x0 = sensor.x - dist
+    var x0 = 0
+    val goal = 20
 
-    Scheduler.Implicits.global.scheduleAtFixedRate(10.second, 1.minute) {
-      println(s"x: $x0, left: ${sensor.x + dist - x0}, for $sensor")
-      println("=====================")
-    }
+    while (x0 <= goal) {
+      val pq = Point(x0, targetY)
 
-    while (x0 <= sensor.x + dist) {
-      var y0 = sensor.y - dist
-      while (y0 <= sensor.y + dist) {
-        val point = Point(x0, y0)
-        if (
-          point.manh(
-            sensor
-          ) <= dist && point != sensor && point != beacon && point.y == targetY
-        )
-          vec.addOne(point)
-        y0 += 1
+      val hasCloser = points.find { case ((sensor, beacon, distance)) =>
+        pq.manh(sensor) <= distance && pq != sensor && pq != beacon
       }
+
+      if (hasCloser.isEmpty) {
+        println(s"Adding point $pq")
+        vec.addOne(pq)
+      }
+
       x0 += 1
     }
 
-    println(s"Point $sensor Finished!")
     vec
   }
 
-  val part1 = Task
-    .parTraverseN(8)(points) { case (s, b) =>
-      collectClosestPoints(s, b)
-    }
-    .map(_.reduce(_ ++ _))
-    .map(_.distinct.count(_.y == targetY))
+  var y0 = 0
+  while (y0 <= 20) {
+    collectOnlyInQuestion(y0)
+    y0 += 1
+  }
 
-  println(Await.result(part1.runToFuture, Duration.Inf))
+//  println(collectOnlyInQuestion(targetY).toList.length)
 
 }
