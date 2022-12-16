@@ -1,12 +1,12 @@
 package adventofcode.a2022
 
+import adventofcode.common.Point
+import adventofcode.common.Point.PointI
 import helpers.Input
 
 object Day9 extends App {
 
-  case class Point(x: Int, y: Int)
-
-  case class State(visited: List[Point], head: Point, tail: Point) {
+  case class State(visited: List[PointI], head: PointI, tail: PointI) {
 
     def moveRight(x: Int): State = {
       ???

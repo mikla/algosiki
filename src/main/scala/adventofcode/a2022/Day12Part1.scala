@@ -1,21 +1,13 @@
 package adventofcode.a2022
 
+import adventofcode.common.Point.{PointI => Point}
+import adventofcode.common.{Point => PointK}
 import helpers.Input
 
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
 object Day12Part1 extends App {
-
-  case class Point(x: Int, y: Int) {
-    def up = copy(x = x - 1)
-    def down = copy(x = x + 1)
-    def left = copy(y = y - 1)
-    def right = copy(y = y + 1)
-
-    def neighbours: List[Point] =
-      List(up, down, left, right)
-  }
 
   val abc = ('a' to 'z').zipWithIndex
   def indexOf(char: Char): Int =
@@ -30,7 +22,7 @@ object Day12Part1 extends App {
   def findChar(s: Char): Point = {
     val row = indexedInput.find(_._1.exists(_._1 == s)).map(_._2).get
     val col = indexedInput(row)._1.find(_._1 == s).map(_._2).get
-    Point(row, col)
+    PointK(row, col)
   }
 
   val spos = findChar('S')
