@@ -8,20 +8,17 @@ object Day17 extends App {
 
     var screen = Array.fill[Char](initHeight, initWidth)('.')
 
-    def highest: Option[Int] =
-      screen
-        .map(_.zipWithIndex)
-        .zipWithIndex
-        .filter(_._1.exists(_._1 == '#'))
-        .maxByOption(_._2)
-        .map(_._2)
+    var highest: Int = 0
 
     var currentHeight = initHeight - 1
 
-    def drawSeq(points: List[(Int, Int)]) =
+    def drawSeq(points: List[(Int, Int)]) = {
       points.foreach { case (x, y) =>
         drawPixel(x, y)
       }
+
+      highest = Math.max(highest, points.map(_._1).max)
+    }
 
     def drawPixel(x: Int, y: Int): Unit =
       screen(x)(y) = '#'
@@ -52,14 +49,13 @@ object Day17 extends App {
 
       possibleToCompact.foreach { rows =>
         screen = screen.drop(rows)
+        highest = highest - rows
       }
 
       possibleToCompact
     }
 
   }
-
-  trait Figure
 
   object Figure {
 
@@ -142,7 +138,7 @@ object Day17 extends App {
   val screen = Screen()
 
   var figureCounter: Long = 0
-  val MaxRockCounter: Long = 2022
+  val MaxRockCounter: Long = 1000000000000L
 
   var operationPosition = 0
 
@@ -156,14 +152,16 @@ object Day17 extends App {
   while (figureCounter <= MaxRockCounter) {
 
     println(s"Figure flying: $figureCounter")
+//    screen.drawScreen
+//    println("========================")
 
     val (figurePointsFn, figureHeight) =
       Figure.AllFigures((figureCounter % Figure.AllFigures.length).toInt)
 
     val currentTop =
-      screen.highest
-        .map(_ + 3 + figureHeight)
-        .getOrElse(3)
+      if (figureCounter == 0) 3
+      else
+        screen.highest + 3 + figureHeight
 
     var figurePoints = figurePointsFn(currentTop)
 
@@ -241,7 +239,7 @@ object Day17 extends App {
 
 //  println(screen.highest)
 
-  screen.drawScreen
-  println(screen.highest.map(_ - 1).getOrElse(0) + compacted)
+//  screen.drawScreen
+  println(screen.highest - 1 + compacted)
 
 }
