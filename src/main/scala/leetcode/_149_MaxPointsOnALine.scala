@@ -1,7 +1,5 @@
 package leetcode
 
-import scala.util.control.Breaks.break
-
 object _149_MaxPointsOnALine extends App {
 
   def maxPoints(points: Array[Array[Int]]): Int = {
