@@ -6,7 +6,6 @@ object _520_DetectCapital extends App {
     word.toLowerCase == word || word.toUpperCase == word || {
       word.head.toUpper == word.head.toUpper && word.tail.toLowerCase == word.tail
     }
-
   }
 
 }
