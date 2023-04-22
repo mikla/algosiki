@@ -5,7 +5,8 @@ import leetcode.TreeNode
 // Functional Data Structures
 sealed trait FTree[+A]
 
-case class FNode[A](left: FTree[A], value: A, right: FTree[A]) extends FTree[A]
+case class FNode[A](value: A, left: FTree[A] = Empty, right: FTree[A] = Empty)
+    extends FTree[A]
 
 case object Empty extends FTree[Nothing]
 
@@ -17,8 +18,8 @@ object FTree {
     if (treeNode == null) Empty
     else
       FNode(
-        fromTreeNode(treeNode.left),
         treeNode.value,
+        fromTreeNode(treeNode.left),
         fromTreeNode(treeNode.right)
       )
   }
@@ -26,7 +27,7 @@ object FTree {
   def toTreeNode(tree: FTree[Int]): TreeNode = {
     tree match {
       case Empty => null
-      case FNode(left, value, right) =>
+      case FNode(value, left, right) =>
         new TreeNode(value, toTreeNode(left), toTreeNode(right))
     }
   }
