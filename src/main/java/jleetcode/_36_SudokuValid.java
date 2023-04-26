@@ -1,3 +1,5 @@
+package jleetcode;
+
 // copilot solution :D
 public class _36_SudokuValid {
 
