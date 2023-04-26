@@ -1,6 +1,6 @@
 package leetcode
 
-import common.tree.{Empty, FNode, FTree}
+import common.tree.{Empty, BNode, BTree}
 
 class _1372_ZigZagPathInBTree extends App {
 
@@ -15,16 +15,16 @@ class _1372_ZigZagPathInBTree extends App {
   }
 
   def longestZigZag(root: TreeNode): Int = {
-    val fpRTree = FTree.fromTreeNode(root)
+    val fpRTree = BTree.fromTreeNode(root)
 
     def loop(
-        tree: FTree[Int],
-        direction: Direction,
-        depth: Int,
-        maxDepth: Int
+              tree: BTree[Int],
+              direction: Direction,
+              depth: Int,
+              maxDepth: Int
     ): Int =
       tree match {
-        case t @ FNode(_, left, right) =>
+        case t @ BNode(_, left, right) =>
           val maxCurDepth = Math.max(depth + 1, maxDepth)
           if (direction == Left)
             Math.max(

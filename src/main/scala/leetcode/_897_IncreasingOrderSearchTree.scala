@@ -1,33 +1,33 @@
 package leetcode
 
-import common.tree.{Empty, FNode, FTree}
+import common.tree.{Empty, BNode, BTree}
 
 object _897_IncreasingOrderSearchTree extends App {
 
   def increasingBST(root: TreeNode): TreeNode = {
-    val froot = FTree.fromTreeNode(root)
+    val froot = BTree.fromTreeNode(root)
 
-    def traverse(tree: FTree[Int]): List[Int] = tree match {
-      case FNode(value, left, right) =>
+    def traverse(tree: BTree[Int]): List[Int] = tree match {
+      case BNode(value, left, right) =>
         traverse(left) ++ List(value) ++ traverse(right)
       case Empty => Nil
     }
 
     val asnFTree = traverse(froot).reverse match {
       case head :: next =>
-        Some(next.foldLeft(FNode(head): FTree[Int]) { case (node, value) =>
-          FNode(value, Empty, node)
+        Some(next.foldLeft(BNode(head): BTree[Int]) { case (node, value) =>
+          BNode(value, Empty, node)
         })
       case Nil => None
     }
 
-    asnFTree.map(FTree.toTreeNode).orNull
+    asnFTree.map(BTree.toTreeNode).orNull
   }
 
-  val test = FNode(
+  val test = BNode(
     5,
-    FNode(3, FNode(2, FNode(1)), FNode(4)),
-    FNode(6, Empty, FNode(8, FNode(7), FNode(9)))
+    BNode(3, BNode(2, BNode(1)), BNode(4)),
+    BNode(6, Empty, BNode(8, BNode(7), BNode(9)))
   )
 
 }

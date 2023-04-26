@@ -1,24 +1,24 @@
 package leetcode
 
-import common.tree.{Empty, FNode, FTree}
+import common.tree.{Empty, BNode, BTree}
 
 object _617_MergeTwoBinaryTrees extends App {
 
   def mergeTrees(root1: TreeNode, root2: TreeNode): TreeNode = {
-    val froot1 = FTree.fromTreeNode(root1)
-    val froot2 = FTree.fromTreeNode(root2)
+    val froot1 = BTree.fromTreeNode(root1)
+    val froot2 = BTree.fromTreeNode(root2)
 
-    def merge(fr1: FTree[Int], fr2: FTree[Int]): FTree[Int] = {
+    def merge(fr1: BTree[Int], fr2: BTree[Int]): BTree[Int] = {
       (fr1, fr2) match {
-        case (FNode(v1, fr1left, fr1right), FNode(v2, fr2left, fr2right)) =>
-          FNode(v1 + v2, merge(fr1left, fr2left), merge(fr1right, fr2right))
-        case (ln @ FNode(_, _, _), Empty) => ln
-        case (Empty, rn @ FNode(_, _, _)) => rn
+        case (BNode(v1, fr1left, fr1right), BNode(v2, fr2left, fr2right)) =>
+          BNode(v1 + v2, merge(fr1left, fr2left), merge(fr1right, fr2right))
+        case (ln @ BNode(_, _, _), Empty) => ln
+        case (Empty, rn @ BNode(_, _, _)) => rn
         case _                            => Empty
       }
     }
 
-    FTree.toTreeNode(merge(froot1, froot2))
+    BTree.toTreeNode(merge(froot1, froot2))
   }
 
 }
