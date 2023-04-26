@@ -1,6 +1,7 @@
-package leetcode
+package leetcode.tree
 
 import common.tree.{BNode, BTree, Empty}
+import leetcode.TreeNode
 
 object _226_InvertBinaryTree extends App {
 

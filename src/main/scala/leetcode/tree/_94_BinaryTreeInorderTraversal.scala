@@ -1,4 +1,6 @@
-package leetcode
+package leetcode.tree
+
+import leetcode.TreeNode
 
 // https://leetcode.com/problems/binary-tree-inorder-traversal/
 object _94_BinaryTreeInorderTraversal {

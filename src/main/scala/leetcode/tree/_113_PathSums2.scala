@@ -1,4 +1,6 @@
-package leetcode
+package leetcode.tree
+
+import leetcode.TreeNode
 
 object _113_PathSums2 extends App {
 

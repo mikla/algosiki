@@ -1,4 +1,6 @@
-package leetcode
+package leetcode.tree
+
+import leetcode.TreeNode
 
 //https://leetcode.com/problems/count-good-nodes-in-binary-tree/
 

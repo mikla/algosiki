@@ -1,6 +1,7 @@
-package leetcode
+package leetcode.tree
 
 import common.tree.{BNode, BTree}
+import leetcode.TreeNode
 
 object _2331_EvaluateBooleanBinaryTree extends App {
 

@@ -1,4 +1,6 @@
-package leetcode
+package leetcode.tree
+
+import leetcode.TreeNode
 
 // https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/
 object _987_VerticalOrderTraversalOfABinaryTree extends App {

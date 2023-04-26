@@ -1,4 +1,6 @@
-package leetcode
+package leetcode.tree
+
+import leetcode.Node
 
 object _429_NAryTreeLevelOrderTraversal extends App {
 

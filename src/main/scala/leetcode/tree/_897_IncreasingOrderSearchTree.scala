@@ -1,6 +1,7 @@
-package leetcode
+package leetcode.tree
 
-import common.tree.{Empty, BNode, BTree}
+import common.tree.{BNode, BTree, Empty}
+import leetcode.TreeNode
 
 object _897_IncreasingOrderSearchTree extends App {
 
