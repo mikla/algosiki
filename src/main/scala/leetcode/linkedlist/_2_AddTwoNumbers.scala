@@ -6,6 +6,21 @@ object _2_AddTwoNumbers extends App {
 
   def addTwoNumbers(l1: ListNode, l2: ListNode): ListNode = {
 
+    def reverseListNode(l: ListNode): ListNode = {
+
+      def loop(l: ListNode, acc: List[Int]): List[Int] =
+        if (l == null) acc
+        else {
+          loop(l.next, l.x :: acc)
+        }
+
+      val elements = loop(l, Nil)
+
+      elements.init.foldRight(new ListNode(elements.last)) { case (e, acc) =>
+        new ListNode(e, acc)
+      }
+    }
+
     def loop(
         l1node: ListNode,
         l2node: ListNode,
@@ -39,14 +54,14 @@ object _2_AddTwoNumbers extends App {
       }
     }
 
-    loop(l1, l2, 0, new ListNode(0))
+    reverseListNode(loop(l1, l2, 0, null))
   }
 
-  val n1 = new ListNode(2, new ListNode(4, new ListNode(3)))
-  val n2 = new ListNode(5, new ListNode(6, new ListNode(4)))
-
-  val ans = addTwoNumbers(n1, n2)
-
-  println(ListNode.toList(addTwoNumbers(n1, n2)))
+//  println(ListNode.toList(reverseListNode(addTwoNumbers(n1, n2))))
+//
+//  val n1 = new ListNode(2, new ListNode(4, new ListNode(3)))
+//  val n2 = new ListNode(5, new ListNode(6, new ListNode(4)))
+//
+//  val ans = addTwoNumbers(n1, n2)
 
 }
