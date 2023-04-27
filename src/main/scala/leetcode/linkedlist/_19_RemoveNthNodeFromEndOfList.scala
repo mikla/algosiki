@@ -1,5 +1,6 @@
-package leetcode
+package leetcode.linkedlist
 
+import leetcode.ListNode
 
 object _19_RemoveNthNodeFromEndOfList extends App {
 
