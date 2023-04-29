@@ -1,4 +1,4 @@
-package leetcode
+package leetcode.strings
 
 // https://leetcode.com/problems/reverse-words-in-a-string-iii/
 object _557_ReverseStringIII extends App {

@@ -1,4 +1,6 @@
-package leetcode
+package leetcode.tree
+
+import leetcode.TreeNode
 
 // https://leetcode.com/problems/construct-string-from-binary-tree/
 

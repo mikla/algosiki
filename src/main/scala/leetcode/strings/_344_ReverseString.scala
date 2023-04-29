@@ -1,4 +1,4 @@
-package leetcode
+package leetcode.strings
 
 // https://leetcode.com/problems/reverse-string/
 object _344_ReverseString extends App {

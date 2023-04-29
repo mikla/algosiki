@@ -1,4 +1,4 @@
-package leetcode
+package leetcode.array
 
 object _944_DeleteColumnsToMakeSorted extends App {
 

@@ -1,4 +1,4 @@
-package leetcode
+package leetcode.strings
 
 object _1768_MergeStrings extends App {
 

@@ -1,4 +1,4 @@
-package leetcode
+package leetcode.strings
 
 object _541_ReversString2 extends App {
 

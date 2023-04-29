@@ -1,4 +1,4 @@
-package leetcode
+package leetcode.strings
 
 object _926_FlipStringToMonotoneIncreasing extends App {
 

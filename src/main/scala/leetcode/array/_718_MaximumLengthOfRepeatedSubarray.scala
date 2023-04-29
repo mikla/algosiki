@@ -1,4 +1,4 @@
-package leetcode
+package leetcode.array
 
 object _718_MaximumLengthOfRepeatedSubarray extends App {
 

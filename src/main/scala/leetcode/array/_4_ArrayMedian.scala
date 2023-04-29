@@ -1,6 +1,6 @@
-package leetcode
+package leetcode.array
 
-import leetcode._4_ArrayMedian.Solution.findMedianSortedArrays
+import leetcode.array._4_ArrayMedian.Solution.findMedianSortedArrays
 
 import scala.annotation.tailrec
 

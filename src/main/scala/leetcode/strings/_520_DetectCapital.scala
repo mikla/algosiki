@@ -1,4 +1,4 @@
-package leetcode
+package leetcode.strings
 
 object _520_DetectCapital extends App {
 

@@ -1,4 +1,4 @@
-package leetcode
+package leetcode.strings
 
 //https://leetcode.com/problems/longest-substring-without-repeating-characters/
 object _3_LongestSubstring extends App {

@@ -1,4 +1,4 @@
-package leetcode
+package leetcode.array
 
 object _918_Maximum_Sum_CircularSubarray extends App {
 

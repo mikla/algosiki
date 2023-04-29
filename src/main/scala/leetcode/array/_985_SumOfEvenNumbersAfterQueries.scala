@@ -1,4 +1,4 @@
-package leetcode
+package leetcode.array
 
 object _985_SumOfEvenNumbersAfterQueries extends App {
 

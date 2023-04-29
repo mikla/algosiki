@@ -1,4 +1,4 @@
-package leetcode
+package leetcode.strings
 
 /** https://leetcode.com/problems/remove-palindromic-subsequences/description/
   */
