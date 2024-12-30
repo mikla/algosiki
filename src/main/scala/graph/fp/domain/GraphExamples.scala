@@ -12,5 +12,6 @@ object GraphExamples extends App {
         (Context(Nil, 3, "c", Nil) & Empty))
 
   println(Renderer.renderDot(fig1))
+  println(Renderer.renderDot(fig1.reverse))
 
 }
