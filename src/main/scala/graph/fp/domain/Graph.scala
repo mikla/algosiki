@@ -23,6 +23,16 @@ sealed trait Graph {
       And(f(context), graph.gmap(f))
   }
 
+  /** gmap via ufold impl */
+  def gmap2(f: Context => Context): Graph =
+    ufold[Graph]((ctx, acc) => And(f(ctx), acc), Graph.Empty)
+
+  /** `u` stands for unordered */
+  def ufold[C](f: (Context, C) => C, u: C): C = this match {
+    case Graph.Empty        => u
+    case Graph.And(c, rest) => f(c, rest.ufold(f, u))
+  }
+
   def reverse: Graph = gmap(_.swap)
 
 }
