@@ -4,10 +4,10 @@ import graph.fp.domain.Graph.{And, Context}
 
 sealed trait Graph {
 
-  def nodes: List[Node] = this match {
-    case Graph.Empty               => Nil
-    case Graph.And(context, graph) => ???
-  }
+  def nodes: List[Node] = ufold[List[Node]](
+    (ctx, acc) => ctx.node :: acc,
+    List.empty[Node]
+  )
 
   def isEmpty: Boolean = this match {
     case Graph.Empty => true

@@ -14,11 +14,6 @@ object GraphExamples extends App {
   println(Renderer.renderDot(fig1))
   println(Renderer.renderDot(fig1.reverse))
 
-  println(
-    fig1.ufold[List[Node]](
-      (ctx, acc) => ctx.node :: acc,
-      List.empty[Node]
-    )
-  )
+  println(fig1.nodes)
 
 }
