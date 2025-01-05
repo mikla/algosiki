@@ -64,7 +64,11 @@ object Graph {
       label: String,
       out: Adj
   ) {
+
     def swap: Context = Context(out, node, label, in)
+
+    /** Selects successors from a known context */
+    def suc: List[Arr] = out
   }
 
   implicit class ContextOps(context: Context) {
