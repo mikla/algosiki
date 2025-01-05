@@ -1,12 +1,12 @@
 package graph.fp.domain
 
-import graph.fp.domain.Graph.{And, Context}
+import graph.fp.domain.Graph.{And, Context, Empty}
 
 sealed trait Graph {
 
   def nodes: List[Node] = ufold[List[Node]](
     (ctx, acc) => ctx.node :: acc,
-    List.empty[Node]
+    List.empty
   )
 
   def isEmpty: Boolean = this match {
@@ -34,6 +34,22 @@ sealed trait Graph {
   }
 
   def reverse: Graph = gmap(_.swap)
+
+  def del(node: Node) = this match {
+    case Graph.Empty         => Graph.Empty
+    case And(context, graph) => ???
+  }
+
+  /** Searches for the context of a given node
+    * @return
+    *   context (if found) with remaining graph
+    */
+  def `match`(node: Node): Option[(Context, Graph)] = this match {
+    case And(ctx @ Context(_, n, _, _), graph) if n == node =>
+      Some((ctx, graph))
+    case And(_, graph) => graph.`match`(node)
+    case Empty         => None
+  }
 
 }
 

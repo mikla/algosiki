@@ -15,5 +15,8 @@ object GraphExamples extends App {
   println(Renderer.renderDot(fig1.reverse))
 
   println(fig1.nodes)
+  println(fig1.`match`(3)) // Some((Context(List(),3,c,List()),Empty))
+  println(fig1.`match`(2)) // Some((Context(List(),3,c,List()),Empty))
+  println(fig1.`match`(5)) // None
 
 }
