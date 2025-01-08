@@ -19,4 +19,6 @@ object GraphExamples extends App {
   println(fig1.`match`(2)) // Some((Context(List(),3,c,List()),Empty))
   println(fig1.`match`(5)) // None
 
+  println(Algorithms.dfs(List(1))(fig1))
+
 }

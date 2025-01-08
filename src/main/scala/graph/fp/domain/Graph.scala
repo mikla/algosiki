@@ -44,11 +44,11 @@ sealed trait Graph {
     * @return
     *   context (if found) with remaining graph
     */
-  def `match`(node: Node): Option[(Context, Graph)] = this match {
+  def `match`(node: Node): (Option[Context], Graph) = this match {
     case And(ctx @ Context(_, n, _, _), graph) if n == node =>
-      Some((ctx, graph))
+      (Some(ctx), graph)
     case And(_, graph) => graph.`match`(node)
-    case Empty         => None
+    case Empty         => (None, this)
   }
 
 }
@@ -68,7 +68,7 @@ object Graph {
     def swap: Context = Context(out, node, label, in)
 
     /** Selects successors from a known context */
-    def suc: List[Arr] = out
+    def suc: List[Node] = out.map(_.node)
   }
 
   implicit class ContextOps(context: Context) {
