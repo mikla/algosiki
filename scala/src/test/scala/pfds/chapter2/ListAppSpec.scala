@@ -1,6 +1,5 @@
 package pfds.chapter2
 
-import org.scalatest._
 import org.scalatest.flatspec._
 import org.scalatest.matchers._
 import pfds.chapter2.ListApp.{suffixes, update}

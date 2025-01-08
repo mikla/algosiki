@@ -1,7 +1,6 @@
 package benchmark.tree
 
 import org.openjdk.jmh.annotations.{Benchmark, Scope, Setup, State}
-import pfds.chapter2.BSTree
 import pfds.chapter3.LeftistHeap
 
 @State(Scope.Benchmark)

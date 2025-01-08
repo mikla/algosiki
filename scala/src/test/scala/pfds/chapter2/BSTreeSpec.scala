@@ -1,8 +1,5 @@
 package pfds.chapter2
 
-import org.scalatest._
-import org.scalatest.flatspec._
-import org.scalatest.matchers._
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should
 import pfds.chapter2.BSTree.{Branch, Empty, Tree}

@@ -1,11 +1,9 @@
 package adventofcode.a2020
 
-import monix.execution.Scheduler.global
 import helpers.Input
 import monix.eval.Task
 
 import scala.concurrent.duration.Duration
-import scala.util.Random
 
 object Day20JurassicJigsaw extends App {
 

@@ -2,7 +2,7 @@ package pfds.chapter3
 
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should
-import pfds.chapter3.LeftistHeap.{Branch, Heap, Empty}
+import pfds.chapter3.LeftistHeap.{Branch, Empty, Heap}
 
 class LeftistHeapSpec extends AnyFlatSpec with should.Matchers {
 
