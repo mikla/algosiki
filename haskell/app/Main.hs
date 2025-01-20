@@ -23,3 +23,11 @@ main = do
   let dfsNodes = dfs [3] myGraph
   putStrLn "DFS traversal order:"
   print dfsNodes
+
+  case match 2 myGraph of
+    (Nothing, _) -> putStrLn "Node not found"
+    (Just context, remainingGraph) -> do
+      putStrLn "Found node context:"
+      print context
+      putStrLn "\nRemaining graph:"
+      print remainingGraph
