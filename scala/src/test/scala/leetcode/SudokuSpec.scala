@@ -57,7 +57,12 @@ class SudokuSpec extends AnyFlatSpec with should.Matchers {
 
   "fillPossibleValues" should "fill possible values" in {
     val puzzle1 = Solver.fillPossibleValues(testPuzzle)
-    puzzle1.map(Coord(3, 1)) shouldBe Cell.Possible(Set(1, 2, 6))
+  
+    puzzle1.get.map(Coord(3, 1)) shouldBe Cell.Possible(Set(1, 2, 6))
+  }
+
+  "fillPossibleValues" should "return none if impossible to find possible values" in {
+    Solver.fillPossibleValues(testPuzzle.update(Coord(3,1), Cell.Filled(8))) shouldBe None
   }
 
   // "Puzzle.solve" should "try to solve puzzle" ignore {

@@ -2,6 +2,7 @@ package leetcode
 
 import leetcode._37_SudokuSolver.Cell.{Filled, Given}
 import adventofcode.a2022.Day5.sol
+import leetcode._37_SudokuSolver.Coord.box
 
 object _37_SudokuSolver extends App {
 
@@ -45,11 +46,15 @@ object _37_SudokuSolver extends App {
         k -> values.head
     }.toList
 
-    val allowedValues: Set[Int] =
-      Puzzle.allAllowedValues diff map.view.values.collect {
+    lazy val allowedValues: Set[Int] = {
+      val boxValus = map.view.values.collect {
         case Cell.Given(v)  => v
         case Cell.Filled(v) => v
-      }.toSet
+      }
+      if (boxValus.toList.distinct.size == boxValus.size) {
+        Puzzle.allAllowedValues diff boxValus.toSet
+      } else Set.empty
+    }
 
     val unfilled: List[(Coord, Cell)] =
       map.collect { case (k, v @ (Cell.Empty | Cell.Possible(_))) =>
@@ -65,12 +70,14 @@ object _37_SudokuSolver extends App {
 
   case class Puzzle(map: Map[Coord, Cell]) {
 
-    def isSolved: Boolean =
-      map.view.values.forall {
-        case Cell.Filled(_) => true
-        case Cell.Given(_)  => true
-        case _              => false
+    val unfilledCount = 
+      map.view.values.count {
+        case ((_: Cell.Filled) | (_: Cell.Given)) => false
+        case _                                    => true
       }
+
+    def isSolved: Boolean = unfilledCount == 0
+
 
     val boxes: IndexedSeq[Box] =
       Coord.boxCoordinatesCache
@@ -80,25 +87,33 @@ object _37_SudokuSolver extends App {
           })
         }
 
-    def allowedInRowFor(coord: Coord): Set[Int] =
-      Puzzle.allAllowedValues diff (1 to 9)
+    def allowedInRowFor(coord: Coord): Set[Int] = {
+      val cellValues = (1 to 9)
         .map(x => Coord(x, coord.y))
         .map(map(_))
         .collect {
           case Filled(v) => v
           case Given(v)  => v
         }
-        .toSet
 
-    def allowedInColFor(coord: Coord): Set[Int] =
-      Puzzle.allAllowedValues diff (1 to 9)
+      if (cellValues.distinct.size == cellValues.size)
+        Puzzle.allAllowedValues diff cellValues.toSet
+      else Set.empty
+    }
+
+    def allowedInColFor(coord: Coord): Set[Int] = {
+      val cellValues = (1 to 9)
         .map(y => Coord(coord.x, y))
         .map(map(_))
         .collect {
           case Filled(v) => v
           case Given(v)  => v
         }
-        .toSet
+
+      if (cellValues.distinct.size == cellValues.size)
+        Puzzle.allAllowedValues diff cellValues.toSet
+      else Set.empty
+    }
 
     def update(coord: Coord, value: Cell) =
       this.copy(map = map.updated(coord, value))
@@ -131,7 +146,7 @@ object _37_SudokuSolver extends App {
     def solve(puzzle: Puzzle): Puzzle = {
       if (puzzle.isSolved) puzzle
       else {
-        val filled = fillPossibleValues(puzzle)
+        val filled = fillPossibleValues(puzzle).get // todo
         val eliminated = eliminateSinglePossible(filled)
 
         if (eliminated == puzzle) {
@@ -143,32 +158,50 @@ object _37_SudokuSolver extends App {
       }
     }
 
-    def solveBacktracking(puzzle: Puzzle): IndexedSeq[Puzzle] = { 
-      println(Renderer.render(puzzle))
-      if (puzzle.isSolved) IndexedSeq(puzzle)
+    def solveBacktracking(puzzle: Puzzle): IndexedSeq[Puzzle] = {
+      println(puzzle.unfilledCount)
+      if (puzzle.isSolved) {
+        throw new Exception("Solved") 
+        IndexedSeq(puzzle)
+      }
       else {
-        fillPossibleValues(puzzle).boxes.flatMap { box =>
-          box.possibleCells.flatMap { case (coord, pos) =>
-            pos.values.map(v => puzzle.update(coord, Cell.Filled(v)))
-          }.flatMap(solveBacktracking)
-        }
+        val p = fillPossibleValues(puzzle)
+        if (p.isEmpty) IndexedSeq.empty[Puzzle]
+        else
+          p.get.boxes.flatMap { box =>
+            box.possibleCells
+              .flatMap { case (coord, pos) =>
+                pos.values.map(v => puzzle.update(coord, Cell.Filled(v)))
+              }
+              .flatMap(solveBacktracking)
+          }
       }
     }
 
-    def fillPossibleValues(puzzle: Puzzle): Puzzle =
-      puzzle.boxes.foldLeft(puzzle) { case (puzzle, box) =>
-        val allowedBoxValues = box.allowedValues
-        box.unfilled
-          .map { case (coord, _) =>
-            coord -> Puzzle.allowedValuesForCell(
-              allowedBoxValues,
-              puzzle.allowedInRowFor(coord),
-              puzzle.allowedInColFor(coord)
-            )
+    def fillPossibleValues(puzzle: Puzzle): Option[Puzzle] =
+      puzzle.boxes.foldLeft(Some(puzzle): Option[Puzzle]) {
+        case (Some(puzz), box) =>
+          val allowedBoxValues = box.allowedValues
+          val cellsWithValues = box.unfilled
+            .map { case (coord, _) =>
+              coord -> Puzzle.allowedValuesForCell(
+                allowedBoxValues,
+                puzz.allowedInRowFor(coord),
+                puzz.allowedInColFor(coord)
+              )
+            }
+
+          if (cellsWithValues.exists(_._2.isEmpty)) {
+            println("No possible")
+            None
+          } else {
+            val puzzle = cellsWithValues.foldLeft(puzz) {
+              case (accPuzzle, (coord, cellValue)) =>
+                accPuzzle.update(coord, Cell.Possible(cellValue))
+            }
+            Some(puzzle)
           }
-          .foldLeft(puzzle) { case (accPuzzle, (coord, cellValue)) =>
-            accPuzzle.update(coord, Cell.Possible(cellValue))
-          }
+        case _ => None
       }
 
     def eliminateSinglePossible(puzzle: Puzzle): Puzzle =
