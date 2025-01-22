@@ -60,8 +60,12 @@ class SudokuSpec extends AnyFlatSpec with should.Matchers {
     puzzle1.map(Coord(3, 1)) shouldBe Cell.Possible(Set(1, 2, 6))
   }
 
-  "Puzzle.solve" should "try to solve puzzle" in {
-    Solver.solve(testPuzzle)
+  // "Puzzle.solve" should "try to solve puzzle" ignore {
+    // Solver.solve(testPuzzle)
+  // }
+
+  "Puzzle.solveBacktracking" should "solve backtracking" in {
+    println(Solver.solveBacktracking(testPuzzle))
   }
 
   val testPuzzle = Puzzle.fromList(

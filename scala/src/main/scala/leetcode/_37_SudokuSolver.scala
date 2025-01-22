@@ -1,6 +1,7 @@
 package leetcode
 
 import leetcode._37_SudokuSolver.Cell.{Filled, Given}
+import adventofcode.a2022.Day5.sol
 
 object _37_SudokuSolver extends App {
 
@@ -53,6 +54,11 @@ object _37_SudokuSolver extends App {
     val unfilled: List[(Coord, Cell)] =
       map.collect { case (k, v @ (Cell.Empty | Cell.Possible(_))) =>
         k -> v
+      }.toList
+
+    val possibleCells: List[(Coord, Cell.Possible)] =
+      map.collect { case (k, p @ Cell.Possible(_)) =>
+        k -> p
       }.toList
 
   }
@@ -134,6 +140,18 @@ object _37_SudokuSolver extends App {
           throw new Exception("")
         } else solve(eliminated)
 
+      }
+    }
+
+    def solveBacktracking(puzzle: Puzzle): IndexedSeq[Puzzle] = { 
+      println(Renderer.render(puzzle))
+      if (puzzle.isSolved) IndexedSeq(puzzle)
+      else {
+        fillPossibleValues(puzzle).boxes.flatMap { box =>
+          box.possibleCells.flatMap { case (coord, pos) =>
+            pos.values.map(v => puzzle.update(coord, Cell.Filled(v)))
+          }.flatMap(solveBacktracking)
+        }
       }
     }
 
